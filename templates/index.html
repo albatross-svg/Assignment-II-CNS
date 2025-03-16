@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
     <title>Cryptography</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
@@ -33,19 +33,20 @@
 
         /* Shadowed buttons with hover effects */
         button {
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #007BFF;
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvJHsE7RHeuqR-JYr1mmxBkEMPv3kBUYjVoT0o0ivTslMp1QFKxTj9xcKX-4v_NvF2Zmk&usqp=CAU') no-repeat center center;
+            background-size: cover;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            padding: 10px 15px; /* Restore original padding */
+            font-size: 1rem; /* Restore original font size */
+            width: auto; /* Ensure buttons adjust to content */
         }
 
         button:hover {
-            background-color: #0056b3;
             transform: scale(1.05);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
         }
@@ -518,13 +519,104 @@
             margin-top: 30px; /* Add spacing above the encryption/decryption section */
             margin-bottom: 30px; /* Add separation space below the section */
         }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://th.bing.com/th/id/OIP.4b0RCchFiaZMXcTTrQL_UwHaEJ?rs=1&pid=ImgDetMain') no-repeat center center;
+            background-size: cover;
+            filter: blur(2.25px); /* Apply slight 15% blur to the background image */
+            z-index: 0; /* Ensure the background is behind the content */
+        }
+
+        .header .title,
+        .header .tagline {
+            position: relative;
+            z-index: 1; /* Ensure text content is above the background */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://th.bing.com/th/id/OIP.4b0RCchFiaZMXcTTrQL_UwHaEJ?rs=1&pid=ImgDetMain') no-repeat center center;
+            background-size: cover;
+            filter: blur(2.25px); /* Apply slight 15% blur to the background image */
+            z-index: 0; /* Ensure the background is behind the content */
+        }
+
+        .footer p,
+        .footer a {
+            position: relative;
+            z-index: 1; /* Ensure text content is above the background */
+        }
+
+        .footer a {
+            color: #00bfff; /* Light blue for links */
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .header .title {
+            font-family: 'Georgia', serif;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #fff; /* Change title color to white */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .title,
+        .header .tagline,
+        .footer p,
+        .footer a {
+            color: #fff; /* Ensure text is white */
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8); /* Add small black shadow effect */
+            font-weight: bold; /* Make the borders of each letter strong */
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
 <body>
     <div class="background">
-        <div id="app">
+        <!-- Header Section -->
+        <header class="header">
             <h1 class="title">Cryptography Tool</h1>
+            <p class="tagline">Explore cryptographic algorithms</p>
+        </header>
+
+        <div id="app">
             <section class="algorithm-section">
                 <h2>Choose Algorithm</h2>
                 <select v-model="algorithm">
@@ -570,6 +662,13 @@
                 <button @click="clearAll">Clear</button>
             </div>
         </div>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <p>© 2025 | Contact: <a href="mailto:yfekreselassie@gmail.com">yfekreselassie@gmail.com</a></p>
+            <p>Powered by Flask and Vue.js | Deployed on Render</p>
+            <p>Version 1.0.0</p>
+        </footer>
     </div>
 
     <script>
