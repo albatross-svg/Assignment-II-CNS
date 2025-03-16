@@ -133,13 +133,14 @@ label {
   align-items: center;
   margin-top: 20px;
   gap: 10px; /* Add spacing between title and dropdown */
+  margin-bottom: 30px; /* Add separation space below the dropdown */
 }
 
 .algorithm-selection select {
   width: 250px; /* Make dropdown wider */
   padding: 10px;
   font-size: 1rem; /* Increase font size */
-  border: 2px solid #007BFF; /* Add border color */
+  border: 2px solid #003366; /* Change border color to deep blue */
   border-radius: 8px; /* Rounded corners */
   background-color: #f9f9f9; /* Light background */
   color: #333; /* Text color */
@@ -147,13 +148,13 @@ label {
 }
 
 .algorithm-selection select:hover {
-  border-color: #0056b3; /* Darker border on hover */
+  border-color: #002244; /* Darker deep blue on hover */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
 }
 
 .algorithm-selection select:focus {
   outline: none;
-  border-color: #003366; /* Focus border color */
+  border-color: #001122; /* Deepest blue on focus */
   box-shadow: 0 0 8px rgba(0, 51, 102, 0.5); /* Glow effect on focus */
 }
 
@@ -178,4 +179,50 @@ label {
 .algorithm-selection button:active {
   transform: scale(0.95);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.algorithm-section {
+  margin: 20px auto; /* Add spacing around the section */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Match shadow level with other sections */
+  transition: box-shadow 0.3s ease; /* Smooth transition for shadow changes */
+  text-align: center; /* Center-align content */
+}
+
+.algorithm-section:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Match hover shadow level with other sections */
+}
+
+.algorithm-section h2 {
+  margin-bottom: 10px;
+  color: #003366; /* Deep blue for headings */
+}
+
+.algorithm-section select {
+  width: 250px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #336699; /* Lighter deep blue border */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Further reduced shadow effect */
+}
+
+.algorithm-section select:hover {
+  border-color: #224466; /* Slightly darker blue on hover */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Reduced hover shadow effect */
+}
+
+.algorithm-section select:focus {
+  outline: none;
+  border-color: #112233; /* Deepest blue on focus */
+  box-shadow: 0 0 6px rgba(51, 102, 153, 0.3); /* Reduced focus glow effect */
+}
+
+.encryption-decryption-section {
+  margin-bottom: 30px; /* Add separation space below the section */
 }
