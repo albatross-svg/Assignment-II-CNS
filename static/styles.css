@@ -1,0 +1,120 @@
+body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 20px;  
+    background: url('https://i.pinimg.com/736x/ac/ae/21/acae2190abcf950199518853fff6b365.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(15px); /* Ensure the blur effect is applied */
+    color: #fff;
+    min-height: 100vh; /* Ensure the background covers the full viewport height */
+}  
+
+.container {  
+    max-width: 600px;  
+    margin: auto;  
+    background: white;  
+    padding: 20px;  
+    border-radius: 8px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    transition: box-shadow 0.3s ease;  
+    backdrop-filter: blur(0px); /* Ensure container content is clear */
+    display: flex;
+    flex-direction: column; /* Default to column layout */
+    gap: 20px; /* Even spacing between columns */
+    justify-content: space-between;
+    flex-wrap: wrap; /* Ensure proper layout on maximize */
+}  
+
+.container:hover {  
+}  
+
+h1 {  
+    color: #333;  
+    text-align: center;  
+}  
+
+p {  
+    font-size: 16px;  
+    color: #555;  
+}  
+
+button {  
+    padding: 10px 15px;  
+    background-color: #007BFF;  
+    color: white;  
+    border: none;  
+    border-radius: 4px;  
+    cursor: pointer;  
+}  
+
+button:hover {  
+    background-color: #0056b3;  
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}  
+
+button:active {  
+    transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+.column {
+    flex: 1;
+    min-width: 300px; /* Ensure columns don't shrink too much */
+    width: 100%; /* Full width for mobile view */
+}
+
+textarea, input {
+    width: 100%; /* Adjust width to fit container */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column; /* Ensure button is always below the textarea */
+    align-items: stretch;
+    gap: 10px; /* Even spacing between textarea and button */
+}
+
+.input-group button {
+    padding: 8px; /* Reduced padding for minimized view */
+    padding: 10px 5px; /* Reduced right-left padding for minimized view */
+    width: 100%; /* Button width matches the container */
+    height: 100%; /* Make button as tall as the display box width */
+    align-self: flex-start; /* Align button to the start of the container */
+    margin-top: 10px; /* Add spacing between textarea and button */
+}
+
+textarea {
+    height: 100px; /* Set a fixed height for the textarea */
+}
+
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row; /* Switch to row layout for larger screens */
+        justify-content: space-between;
+    }
+
+    .column {
+        width: 45%; /* Restore column width for larger screens */
+    }
+
+    .input-group {
+        flex-direction: column; /* Keep button below textarea even on larger screens */
+        align-items: stretch;
+        gap: 10px; /* Maintain even spacing */
+    }
+    .input-group button {
+        padding: 10px; /* Restore padding for maximized view */
+        padding: 10px 15px; /* Restore right-left padding for maximized view */
+        width: auto; /* Button width adjusts to content when maximized */
+        height: auto; /* Reset height for maximized view */
+        align-self: flex-start; /* Align button to the start of the container */
+    }
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #003366; /* Deep blue color */
+    font-size: 1.2rem; /* Slightly larger and consistent font size */
+}

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptography</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        /* Updated background with cybersecurity theme */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url('https://i.pinimg.com/736x/ac/ae/21/acae2190abcf950199518853fff6b365.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh; /* Ensure the background covers the full viewport height */
+        }
+
+        h1, h2 {
+            color: #003366; /* Deep blue for headings */
+            text-align: center;
+        }
+
+        input, textarea {
+            margin: 5px 0;
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Shadowed buttons with hover effects */
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .result {
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+
+        /* Container with hover effect */
+        .container {
+            display: flex;
+            flex-direction: column; /* Default to column layout for mobile */
+            gap: 20px; /* Space between columns */
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .column {
+            width: 100%; /* Full width for mobile view */
+        }
+
+        .algorithm-selection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .algorithm-selection select {
+            width: 200px;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .algorithm-selection button {
+            margin-top: 10px;
+            padding: 15px 20px; /* Increased padding for a bigger button */
+            font-size: 1.1rem; /* Slightly larger font size */
+        }
+
+        .background {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url('https://i.pinimg.com/736x/ac/ae/21/acae2190abcf950199518853fff6b365.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh; /* Ensure the background covers the full viewport height */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #003366; /* Deep blue color */
+            font-size: 1.2rem; /* Slightly larger and consistent font size */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column; /* Default to column layout */
+            align-items: stretch;
+            gap: 10px; /* Space between textarea and button */
+        }
+
+        .input-group button {
+            width: auto; /* Button width adjusts to the text content */
+            align-self: flex-start; /* Align button to the start of the container */
+        }
+
+        textarea {
+            height: 100px; /* Set a fixed height for the textarea */
+        }
+
+        @media (min-width: 768px) {
+            .input-group {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                align-items: center;
+                gap: 10px; /* Space between textarea and button */
+            }
+
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+                align-self: center; /* Center align button for larger screens */
+            }
+        }
+
+        .input-group button {
+            width: 100%; /* Default button width matches the display box */
+            height: 100%; /* Make button as tall as the display box width */
+        }
+
+        textarea {
+            height: 100px; /* Set a fixed height for the textarea */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                justify-content: space-between;
+            }
+
+            .column {
+                width: 45%; /* Restore column width for larger screens */
+            }
+
+            .input-group {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                align-items: center;
+                gap: 0; /* Remove space between textarea and button */
+            }
+
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+                height: auto; /* Reset height for maximized view */
+            }
+        }
+
+        .input-group button {
+            width: 100%; /* Default button width matches the display box */
+        }
+
+        @media (min-width: 768px) {
+            .input-group {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                align-items: center;
+                gap: 0; /* Remove space between textarea and button */
+            }
+
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+            }
+        }
+
+        .input-group button {
+            padding: 8px; /* Reduced padding for minimized view */
+        }
+
+        @media (min-width: 768px) {
+            .input-group button {
+                padding: 10px; /* Restore padding for maximized view */
+            }
+        }
+
+        .input-group button {
+            padding: 10px 5px; /* Reduced right-left padding for minimized view */
+        }
+
+        @media (min-width: 768px) {
+            .input-group button {
+                padding: 10px 15px; /* Restore right-left padding for maximized view */
+            }
+        }
+
+        .title {
+            font-family: 'Georgia', serif; /* Beautiful serif font */
+            font-size: 3.5rem; /* Bigger font size */
+            font-weight: bold; /* Bold font */
+            color: #003366; /* Deep blue color */
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Default to column layout for mobile */
+            gap: 20px; /* Space between columns */
+        }
+
+        .column {
+            width: 100%; /* Full width for mobile view */
+        }
+
+        textarea, input {
+            width: 100%; /* Adjust width to fit container */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column; /* Default to column layout */
+            align-items: stretch;
+            gap: 10px; /* Space between textarea and button */
+        }
+
+        .input-group button {
+            width: 100%; /* Button width matches the container */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                justify-content: space-between;
+            }
+
+            .column {
+                width: 45%; /* Restore column width for larger screens */
+            }
+
+            .input-group {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                align-items: center;
+                gap: 10px; /* Space between textarea and button */
+            }
+
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Default to column layout */
+            gap: 20px; /* Even spacing between columns */
+        }
+
+        .column {
+            width: 100%; /* Full width for mobile view */
+        }
+
+        textarea, input {
+            width: 100%; /* Adjust width to fit container */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column; /* Ensure button is always below the textarea */
+            align-items: stretch;
+            gap: 10px; /* Even spacing between textarea and button */
+        }
+
+        .input-group button {
+            width: 100%; /* Button width matches the container */
+        }
+
+        textarea {
+            height: 100px; /* Set a fixed height for the textarea */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                justify-content: space-between;
+            }
+
+            .column {
+                width: 45%; /* Restore column width for larger screens */
+            }
+
+            .input-group {
+                flex-direction: column; /* Keep button below textarea even on larger screens */
+                align-items: stretch;
+                gap: 10px; /* Maintain even spacing */
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Default to column layout */
+            gap: 20px; /* Even spacing between columns */
+        }
+
+        .column {
+            width: 100%; /* Full width for mobile view */
+        }
+
+        textarea, input {
+            width: 100%; /* Adjust width to fit container */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column; /* Ensure button is always below the textarea */
+            align-items: stretch;
+            gap: 10px; /* Even spacing between textarea and button */
+        }
+
+        textarea {
+            height: 100px; /* Set a fixed height for the textarea */
+        }
+
+        .input-group button {
+            width: auto; /* Button width adjusts to content */
+            align-self: flex-start; /* Align button to the start of the container */
+            margin-top: 10px; /* Add spacing between textarea and button */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                justify-content: space-between;
+            }
+
+            .column {
+                width: 45%; /* Restore column width for larger screens */
+            }
+
+            .input-group {
+                flex-direction: column; /* Keep button below textarea even on larger screens */
+                align-items: stretch;
+                gap: 10px; /* Maintain even spacing */
+            }
+
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+                align-self: flex-start; /* Align button to the start of the container */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <div id="app">
+            <h1 class="title">Cryptography Tool</h1>
+            <div class="container">
+                <div class="column">
+                    <label for="plaintext">Message to Encrypt</label>
+                    <div class="input-group">
+                        <textarea id="plaintext" v-model="plaintext" placeholder="Enter text to encrypt"></textarea>
+                        <button @click="copyMessage(plaintext)">Copy Message</button>
+                    </div>
+                    <input type="text" v-model="key" placeholder="Encryption/Decryption Key">
+                    <button @click="encrypt">Encrypt</button>
+                </div>
+                <div class="column">
+                    <label for="encryptedText">Message to Decrypt</label>
+                    <div class="input-group">
+                        <textarea id="encryptedText" v-model="encryptedText" placeholder="Enter text to decrypt"></textarea>
+                        <button @click="copyMessage(encryptedText)">Copy CipherText</button>
+                    </div>
+                    <input type="text" v-model="key" placeholder="Encryption/Decryption Key">
+                    <button @click="decrypt">Decrypt</button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="column">
+                    <label for="encryptedResult">Encrypted Message</label>
+                    <textarea id="encryptedResult" v-model="encryptedResult" readonly></textarea>
+                </div>
+                <div class="column">
+                    <label for="decryptedResult">Original Decrypted Message</label>
+                    <textarea id="decryptedResult" v-model="decryptedResult" readonly></textarea>
+                </div>
+            </div>
+            <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
+            <div class="algorithm-selection">
+                <h2>Choose Algorithm</h2>
+                <select v-model="algorithm">
+                    <option value="aes">AES</option>
+                    <option value="3des">3DES</option>
+                    <option value="otp">OTP</option>
+                </select>
+                <button @click="clearAll">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    plaintext: '',
+                    encryptedText: '',
+                    key: '',
+                    encryptedResult: null,
+                    decryptedResult: null,
+                    errorMessage: null,
+                    algorithm: 'aes'
+                };
+            },
+            methods: {
+                async encrypt() {
+                    this.errorMessage = null;
+                    try {
+                        const response = await fetch(`/api/${this.algorithm}/encrypt`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ plaintext: this.plaintext, key: this.key })
+                        });
+                        const data = await response.json();
+                        if (response.ok) {
+                            this.encryptedResult = data.encrypted_text;
+                            this.encryptedText = data.encrypted_text; // Automatically fill the encrypted text for decryption
+                        } else {
+                            this.errorMessage = data.error || "Encryption failed.";
+                        }
+                    } catch (error) {
+                        this.errorMessage = "Network error. Check Flask server.";
+                    }
+                },
+                async decrypt() {
+                    this.errorMessage = null;
+                    try {
+                        const response = await fetch(`/api/${this.algorithm}/decrypt`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ encrypted: this.encryptedText, key: this.key })
+                        });
+                        const data = await response.json();
+                        if (response.ok) {
+                            this.decryptedResult = data.decrypted_text;
+                        } else {
+                            this.errorMessage = data.error || "Decryption failed.";
+                        }
+                    } catch (error) {
+                        this.errorMessage = "Network error. Check Flask server.";
+                    }
+                },
+                copyMessage(message) {
+                    navigator.clipboard.writeText(message);
+                },
+                clearAll() {
+                    this.plaintext = '';
+                    this.encryptedText = '';
+                    this.key = '';
+                    this.encryptedResult = null;
+                    this.decryptedResult = null;
+                    this.errorMessage = null;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
