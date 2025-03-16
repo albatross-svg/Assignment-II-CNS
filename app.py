@@ -132,4 +132,4 @@ def api_decrypt_otp():
     return jsonify({'decrypted_text': result})
 
 if __name__ == '__main__':  
-    app.run(debug=True)
+    app.run()
