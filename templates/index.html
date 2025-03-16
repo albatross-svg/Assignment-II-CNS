@@ -94,19 +94,52 @@
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
+            gap: 10px; /* Add spacing between title and dropdown */
         }
 
         .algorithm-selection select {
-            width: 200px;
+            width: 250px; /* Make dropdown wider */
             padding: 10px;
-            text-align: center;
-            margin-bottom: 10px;
+            font-size: 1rem; /* Increase font size */
+            border: 2px solid #007BFF; /* Add border color */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            color: #333; /* Text color */
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .algorithm-selection select:hover {
+            border-color: #0056b3; /* Darker border on hover */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+        }
+
+        .algorithm-selection select:focus {
+            outline: none;
+            border-color: #003366; /* Focus border color */
+            box-shadow: 0 0 8px rgba(0, 51, 102, 0.5); /* Glow effect on focus */
         }
 
         .algorithm-selection button {
-            margin-top: 10px;
-            padding: 15px 20px; /* Increased padding for a bigger button */
-            font-size: 1.1rem; /* Slightly larger font size */
+            padding: 15px 25px; /* Larger button */
+            font-size: 1.2rem; /* Larger font size */
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .algorithm-selection button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .algorithm-selection button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .background {
@@ -228,9 +261,13 @@
             font-size: 3.5rem; /* Bigger font size */
             font-weight: bold; /* Bold font */
             color: #003366; /* Deep blue color */
-            text-align: center;
+            text-align: center; /* Center-align the title */
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
+            margin: 0 auto; /* Ensure proper centering */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
         }
 
         .container {
@@ -380,6 +417,59 @@
                 align-self: flex-start; /* Align button to the start of the container */
             }
         }
+
+        .algorithm-selection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px; /* Add spacing between title and dropdown */
+        }
+
+        .algorithm-selection select {
+            width: 250px; /* Make dropdown wider */
+            padding: 10px;
+            font-size: 1rem; /* Increase font size */
+            border: 2px solid #007BFF; /* Add border color */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            color: #333; /* Text color */
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .algorithm-selection select:hover {
+            border-color: #0056b3; /* Darker border on hover */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+        }
+
+        .algorithm-selection select:focus {
+            outline: none;
+            border-color: #003366; /* Focus border color */
+            box-shadow: 0 0 8px rgba(0, 51, 102, 0.5); /* Glow effect on focus */
+        }
+
+        .algorithm-selection button {
+            padding: 15px 25px; /* Larger button */
+            font-size: 1.2rem; /* Larger font size */
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .algorithm-selection button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .algorithm-selection button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 
@@ -387,6 +477,14 @@
     <div class="background">
         <div id="app">
             <h1 class="title">Cryptography Tool</h1>
+            <div class="algorithm-selection">
+                <h2>Choose Algorithm</h2>
+                <select v-model="algorithm">
+                    <option value="aes">AES</option>
+                    <option value="3des">3DES</option>
+                    <option value="otp">OTP</option>
+                </select>
+            </div>
             <div class="container">
                 <div class="column">
                     <label for="plaintext">Message to Encrypt</label>
@@ -419,12 +517,6 @@
             </div>
             <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
             <div class="algorithm-selection">
-                <h2>Choose Algorithm</h2>
-                <select v-model="algorithm">
-                    <option value="aes">AES</option>
-                    <option value="3des">3DES</option>
-                    <option value="otp">OTP</option>
-                </select>
                 <button @click="clearAll">Clear</button>
             </div>
         </div>
