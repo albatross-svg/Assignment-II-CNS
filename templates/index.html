@@ -701,9 +701,11 @@
                             this.encryptedText = data.encrypted_text; // Automatically fill the encrypted text for decryption
                         } else {
                             this.errorMessage = data.error || "Encryption failed.";
+                            alert(this.errorMessage); // Display popup box with the error message
                         }
                     } catch (error) {
                         this.errorMessage = "Network error. Check Flask server.";
+                        alert(this.errorMessage); // Display popup box for network errors
                     }
                 },
                 async decrypt() {
@@ -719,9 +721,11 @@
                             this.decryptedResult = data.decrypted_text;
                         } else {
                             this.errorMessage = data.error || "Decryption failed.";
+                            alert(this.errorMessage); // Display popup box with the error message
                         }
                     } catch (error) {
                         this.errorMessage = "Network error. Check Flask server.";
+                        alert(this.errorMessage); // Display popup box for network errors
                     }
                 },
                 copyMessage(message) {

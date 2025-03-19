@@ -7,7 +7,7 @@ app = Flask(__name__)
 # One-time pad encryption  
 def otp_encrypt(message, key):  
     if len(key) < len(message):
-        raise ValueError("Key must be at least as long as the message.")
+        raise ValueError("Key must be at least as long as the message.")  # Actively raise ValueError
     return ''.join(chr(ord(m) ^ ord(k)) for m, k in zip(message, key))  
 
 def otp_decrypt(encrypted_message, key):  
@@ -100,10 +100,11 @@ def api_encrypt_otp():
     data = request.json  
     plaintext = data['plaintext']  
     key = data['key']
-    if len(key) < len(plaintext):
-        return jsonify({'error': 'Key must be at least as long as the plaintext.'}), 400
-    result = otp_encrypt(plaintext, key)  
-    return jsonify({'encrypted_text': result})  
+    try:
+        result = otp_encrypt(plaintext, key)  
+        return jsonify({'encrypted_text': result})  
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400  # Return error message in JSON response
 
 @app.route('/api/aes/decrypt', methods=['POST'])
 def api_decrypt_aes():
@@ -128,8 +129,11 @@ def api_decrypt_otp():
     key = data['key']
     if len(key) < len(encrypted):
         return jsonify({'error': 'Key must be at least as long as the encrypted message.'}), 400
-    result = otp_decrypt(encrypted, key)
-    return jsonify({'decrypted_text': result})
+    try:
+        result = otp_decrypt(encrypted, key)
+        return jsonify({'decrypted_text': result})
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':  
     app.run()
