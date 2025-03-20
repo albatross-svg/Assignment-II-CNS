@@ -1,45 +1,63 @@
 from flask import Flask, request, jsonify, render_template  
 from Crypto.Cipher import DES, AES  
+from Crypto.Random import get_random_bytes  
+from Crypto.Protocol.KDF import PBKDF2  
 import base64  
+import os  
 
 app = Flask(__name__)  
 
 # One-time pad encryption  
-def otp_encrypt(message, key):  
+def otp_encrypt(message: str, key: str) -> str:  
     if len(key) < len(message):
-        raise ValueError("Key must be at least as long as the message.")  # Actively raise ValueError
+        raise ValueError("Key must be at least as long as the message.")  
     return ''.join(chr(ord(m) ^ ord(k)) for m, k in zip(message, key))  
 
-def otp_decrypt(encrypted_message, key):  
-    return otp_encrypt(encrypted_message, key)  # OTP is symmetric  
+def otp_decrypt(encrypted_message: str, key: str) -> str:  
+    return otp_encrypt(encrypted_message, key)  
 
 # DES encryption and decryption  
-def des_encrypt(key, plaintext):  
+def des_encrypt(key: str, plaintext: str) -> str:  
     cipher = DES.new(key.ljust(8)[:8].encode('utf-8'), DES.MODE_ECB)  
     padded_text = plaintext + (8 - len(plaintext) % 8) * chr(8 - len(plaintext) % 8)  
     return base64.b64encode(cipher.encrypt(padded_text.encode('utf-8'))).decode('utf-8')  
 
-def des_decrypt(key, encrypted):  
+def des_decrypt(key: str, encrypted: str) -> str:  
     cipher = DES.new(key.ljust(8)[:8].encode('utf-8'), DES.MODE_ECB)  
     decrypted = cipher.decrypt(base64.b64decode(encrypted.encode('utf-8')))  
     padding_length = decrypted[-1]  
     return decrypted[:-padding_length].decode('utf-8')  
 
-# AES encryption and decryption  
-def aes_encrypt(key, plaintext):  
-    cipher = AES.new(key.ljust(16)[:16].encode('utf-8'), AES.MODE_ECB)  
-    padded_text = plaintext + (16 - len(plaintext) % 16) * chr(16 - len(plaintext) % 16)  
-    return base64.b64encode(cipher.encrypt(padded_text.encode('utf-8'))).decode('utf-8')  
+# AES-256 GCM encryption and decryption with PBKDF2 key derivation
+def derive_key(password: str, salt: bytes, iterations: int = 100000) -> bytes:
+    return PBKDF2(password, salt, dkLen=32, count=iterations)
 
-def aes_decrypt(key, encrypted):  
-    cipher = AES.new(key.ljust(16)[:16].encode('utf-8'), AES.MODE_ECB)  
-    decrypted = cipher.decrypt(base64.b64decode(encrypted.encode('utf-8')))  
-    padding_length = decrypted[-1]  
-    return decrypted[:-padding_length].decode('utf-8')  
+def aes_gcm_encrypt(password: str, plaintext: str) -> dict:
+    salt = get_random_bytes(16)  # Generate a random salt
+    key = derive_key(password, salt)  # Derive a 256-bit key
+    cipher = AES.new(key, AES.MODE_GCM)  # AES-256 in GCM mode
+    nonce = cipher.nonce  # Random nonce
+    ciphertext, tag = cipher.encrypt_and_digest(plaintext.encode('utf-8'))  # Encrypt and authenticate
+    return {
+        'salt': base64.b64encode(salt).decode('utf-8'),
+        'nonce': base64.b64encode(nonce).decode('utf-8'),
+        'ciphertext': base64.b64encode(ciphertext).decode('utf-8'),
+        'tag': base64.b64encode(tag).decode('utf-8')
+    }
+
+def aes_gcm_decrypt(password: str, encrypted_data: dict) -> str:
+    salt = base64.b64decode(encrypted_data['salt'])
+    nonce = base64.b64decode(encrypted_data['nonce'])
+    ciphertext = base64.b64decode(encrypted_data['ciphertext'])
+    tag = base64.b64decode(encrypted_data['tag'])
+    key = derive_key(password, salt)  # Derive the same 256-bit key
+    cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)  # AES-256 in GCM mode
+    plaintext = cipher.decrypt_and_verify(ciphertext, tag)  # Decrypt and verify
+    return plaintext.decode('utf-8')
 
 @app.route('/')  
 def home():  
-    return render_template('index.html', otpResult='', desResult='', aesResult='')  # Initialize variables  
+    return render_template('index.html', otpResult='', desResult='', aesResult='')  
 
 @app.route('/encrypt', methods=['POST'])  
 def encrypt():  
@@ -48,17 +66,19 @@ def encrypt():
     key = data['key']  
     message = data['message']  
     
+    result = ''
     if method == 'otp':  
         result = otp_encrypt(message, key)  
-        return render_template('index.html', otpResult=result, desResult='', aesResult='')  
     elif method == 'des':  
         result = des_encrypt(key, message)  
-        return render_template('index.html', otpResult='', desResult=result, aesResult='')  
     elif method == 'aes':  
-        result = aes_encrypt(key, message)  
-        return render_template('index.html', otpResult='', desResult='', aesResult=result)  
+        result = aes_gcm_encrypt(key, message)  
     else:  
         return jsonify({'error': 'Invalid method'}), 400  
+    
+    return render_template('index.html', otpResult=(result if method == 'otp' else ''), 
+                           desResult=(result if method == 'des' else ''), 
+                           aesResult=(result if method == 'aes' else ''))  
 
 @app.route('/decrypt', methods=['POST'])  
 def decrypt():  
@@ -67,25 +87,27 @@ def decrypt():
     key = data['key']  
     encrypted_message = data['message']  
     
+    result = ''
     if method == 'otp':  
         result = otp_decrypt(encrypted_message, key)  
-        return render_template('index.html', otpResult=result, desResult='', aesResult='')  
     elif method == 'des':  
         result = des_decrypt(key, encrypted_message)  
-        return render_template('index.html', otpResult='', desResult=result, aesResult='')  
     elif method == 'aes':  
-        result = aes_decrypt(key, encrypted_message)  
-        return render_template('index.html', otpResult='', desResult='', aesResult=result)  
+        result = aes_gcm_decrypt(key, encrypted_message)  
     else:  
         return jsonify({'error': 'Invalid method'}), 400  
+    
+    return render_template('index.html', otpResult=(result if method == 'otp' else ''), 
+                           desResult=(result if method == 'des' else ''), 
+                           aesResult=(result if method == 'aes' else ''))  
 
 @app.route('/api/aes/encrypt', methods=['POST'])  
 def api_encrypt_aes():  
     data = request.json  
-    key = data['key']  
+    password = data['password']  
     plaintext = data['plaintext']  
-    result = aes_encrypt(key, plaintext)  
-    return jsonify({'encrypted_text': result})  
+    result = aes_gcm_encrypt(password, plaintext)  
+    return jsonify(result)  
 
 @app.route('/api/3des/encrypt', methods=['POST'])  
 def api_encrypt_3des():  
@@ -104,15 +126,23 @@ def api_encrypt_otp():
         result = otp_encrypt(plaintext, key)  
         return jsonify({'encrypted_text': result})  
     except ValueError as e:
-        return jsonify({'error': str(e)}), 400  # Return error message in JSON response
+        return jsonify({'error': str(e)}), 400  
 
 @app.route('/api/aes/decrypt', methods=['POST'])
 def api_decrypt_aes():
     data = request.json
-    key = data['key']
-    encrypted = data['encrypted']
-    result = aes_decrypt(key, encrypted)
-    return jsonify({'decrypted_text': result})
+    password = data['password']
+    encrypted_data = {
+        'salt': data['salt'],
+        'nonce': data['nonce'],
+        'ciphertext': data['ciphertext'],
+        'tag': data['tag']
+    }
+    try:
+        plaintext = aes_gcm_decrypt(password, encrypted_data)
+        return jsonify({'decrypted_text': plaintext})
+    except (ValueError, KeyError) as e:
+        return jsonify({'error': 'Decryption failed: ' + str(e)}), 400
 
 @app.route('/api/3des/decrypt', methods=['POST'])
 def api_decrypt_3des():

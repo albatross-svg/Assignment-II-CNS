@@ -232,20 +232,3 @@ label {
 .encryption-decryption-section {
   margin-bottom: 30px; /* Add separation space below the section */
 }
-
-.error {
-    color: red;
-    font-weight: bold;
-    margin-top: 15px;
-    text-align: center;
-}
-
-.alert {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 4px;
-    margin: 10px 0;
-    text-align: center;
-    border: 1px solid #f5c6cb;
-}
