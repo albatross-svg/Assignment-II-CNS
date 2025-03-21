@@ -20,24 +20,44 @@ createApp({
     },
     methods: {
         async encryptAES() {
-            this.errorMessage = null; // Clear error message before making API call
+            this.errorMessage = null;
+
+            // Validate input
+            if (!this.aesPlaintext.trim()) {
+                this.errorMessage = "Plaintext is required.";
+                console.error(this.errorMessage);
+                return;
+            }
+            if (!this.aesKey.trim()) {
+                this.errorMessage = "Password is required.";
+                console.error(this.errorMessage);
+                return;
+            }
+
             try {
+                const body = {
+                    plaintext: this.aesPlaintext.trim(),
+                    password: this.aesKey.trim()
+                };
+                console.log("Sending AES encryption request with body:", body);
+
                 const response = await fetch('/api/aes/encrypt', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        plaintext: this.aesPlaintext,
-                        key: this.aesKey
-                    })
+                    body: JSON.stringify(body)
                 });
-                const data = await response.json(); // Parse JSON response
+
+                const data = await response.json();
                 if (response.ok) {
-                    this.aesResult = data.encrypted_text; // Update AES result
+                    console.log("AES encryption successful:", data);
+                    this.aesResult = data.ciphertext || data.result; // Handle AES response
                 } else {
                     this.errorMessage = data.error || "AES encryption failed.";
+                    console.error(this.errorMessage);
                 }
             } catch (error) {
                 this.errorMessage = "Network error. Please check the server.";
+                console.error(this.errorMessage);
             }
         },
         async decryptAES() {
