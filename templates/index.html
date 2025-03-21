@@ -605,6 +605,66 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Stack elements vertically */
+                gap: 15px; /* Add spacing between stacked elements */
+            }
+
+            .column {
+                width: 100%; /* Full width for mobile */
+                margin-bottom: 20px; /* Add spacing between stacked columns */
+            }
+
+            textarea, input {
+                font-size: 1rem; /* Adjust font size for readability */
+                padding: 8px; /* Adjust padding for smaller screens */
+            }
+
+            button {
+                font-size: 1rem; /* Adjust button font size */
+                padding: 10px; /* Adjust button padding */
+                width: 100%; /* Make buttons take full width */
+            }
+
+            .algorithm-selection {
+                width: 100%; /* Ensure dropdown takes full width */
+                margin-top: 10px; /* Add spacing above dropdown */
+            }
+
+            .algorithm-selection select {
+                width: 100%; /* Make dropdown take full width */
+                font-size: 1rem; /* Adjust font size for readability */
+            }
+
+            .input-group {
+                flex-direction: column; /* Stack input and button vertically */
+                gap: 10px; /* Add spacing between elements */
+            }
+
+            .input-group button {
+                width: 100%; /* Ensure buttons take full width */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 1.5rem; /* Reduce heading size */
+            }
+
+            textarea, input {
+                font-size: 0.9rem; /* Adjust font size for smaller screens */
+            }
+
+            button {
+                font-size: 0.9rem; /* Adjust button font size */
+            }
+
+            .container {
+                padding: 10px; /* Further reduce padding */
+            }
+        }
     </style>
 </head>
 
