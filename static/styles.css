@@ -1,4 +1,4 @@
-/* Add a wrapper for the blurred background */
+/* Isolate the blurred background */
 .background {
   position: fixed; /* Fix the background to the viewport */
   top: 0;
@@ -8,68 +8,70 @@
   background: url('https://i.pinimg.com/736x/ac/ae/21/acae2190abcf950199518853fff6b365.jpg') no-repeat center center fixed;
   background-size: cover;
   filter: blur(15px); /* Apply blur only to the background */
-  z-index: -1; /* Place the background behind all content */
+  z-index: -1; /* Ensure the background is behind all content */
+  pointer-events: none; /* Prevent interaction with the background */
 }
 
 /* Ensure the content is clear and visible */
-body {  
-  font-family: Arial, sans-serif;  
-  margin: 0;  
-  padding: 20px;  
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
   color: #fff;
-  min-height: 100vh; /* Ensure the background covers the full viewport height */
+  min-height: 100vh;
   position: relative; /* Ensure content is above the background */
   z-index: 1; /* Place content above the blurred background */
-}  
+  background: transparent; /* Ensure no additional background is applied */
+}
 
 /* Ensure the container is responsive */
-.container {  
+.container {
   max-width: 100%; /* Allow the container to use the full width of the screen */
-  margin: auto;  
-  background: white;  
-  padding: 20px;  
-  border-radius: 8px;  
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column; /* Default to column layout */
   gap: 20px; /* Even spacing between columns */
   justify-content: space-between;
   flex-wrap: wrap; /* Ensure proper layout on maximize */
-}  
+}
 
-.container:hover {  
-}  
+.container:hover {
+}
 
-h1 {  
-  color: #333;  
-  text-align: center;  
-}  
+h1 {
+  color: #333;
+  text-align: center;
+}
 
-p {  
-  font-size: 16px;  
-  color: #555;  
-}  
+p {
+  font-size: 16px;
+  color: #555;
+}
 
-button {  
+button {
   background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvJHsE7RHeuqR-JYr1mmxBkEMPv3kBUYjVoT0o0ivTslMp1QFKxTj9xcKX-4v_NvF2Zmk&usqp=CAU') no-repeat center center;
   background-size: cover;
-  color: white;  
-  border: none;  
-  border-radius: 8px;  
-  cursor: pointer;  
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   padding: 12px; /* Restore original padding */
   font-size: 1rem; /* Restore original font size */
   width: 100%; /* Ensure buttons adjust to content */
-}  
+}
 
-button:hover {  
+button:hover {
   transform: scale(1.05); /* Slight zoom effect on hover */
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-}  
+}
 
-button:active {  
+button:active {
   transform: scale(0.95); /* Slight shrink effect on click */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
