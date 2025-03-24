@@ -23,6 +23,7 @@ body {
   gap: 20px; /* Even spacing between columns */
   justify-content: space-between;
   flex-wrap: wrap; /* Ensure proper layout on maximize */
+  overflow: visible; /* Ensure no content is hidden */
 }  
 
 .container:hover {  
@@ -135,11 +136,12 @@ label {
   align-items: center; /* Center vertically */
   padding: 20px; /* Add padding to prevent truncation */
   word-wrap: break-word; /* Ensure long words wrap properly */
-  max-width: 90%; /* Ensure the title does not overflow */
+  max-width: 100%; /* Ensure the title does not overflow */
   color: #fff; /* Ensure the title color contrasts with the background */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
   overflow-wrap: break-word; /* Break long words if necessary */
   white-space: normal; /* Allow text to wrap to the next line */
+  overflow: visible; /* Ensure no content is hidden */
 }
 
 .header {
@@ -152,6 +154,7 @@ label {
   justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
   flex-wrap: wrap; /* Allow wrapping of content if necessary */
+  overflow: visible; /* Ensure no content is hidden */
 }
 
 .header::before {
@@ -340,7 +343,7 @@ button, input, textarea {
   }
 
   .title {
-    font-size: 2.5rem; /* Adjust font size for smaller screens */
+    font-size: 2.8rem; /* Adjust font size for smaller screens */
     padding: 15px; /* Add padding to prevent truncation */
   }
 }
@@ -373,15 +376,15 @@ button, input, textarea {
     }
 
     .title {
-        font-size: 2.5rem; /* Adjust font size for smaller screens */
-        padding: 15px; /* Add padding to prevent truncation */
+        font-size: 2.5rem; /* Further adjust font size for very small screens */
+        padding: 10px; /* Further reduce padding */
     }
 }
 
 /* Further adjustments for very small screens */
 @media (max-width: 480px) {
   h1, h2 {
-    font-size: 1.5rem; /* Reduce heading size */
+    font-size: 1rem; /* Reduce heading size */
   }
 
   textarea, input {
