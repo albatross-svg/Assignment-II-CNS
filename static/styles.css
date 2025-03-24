@@ -10,7 +10,7 @@ body {
 }  
 
 .container {  
-  max-width: 600px;  
+  max-width: 90%; /* Adjust width to fit most screen sizes */
   margin: auto;  
   background: white;  
   padding: 20px;  
@@ -97,6 +97,7 @@ textarea {
   .container {
       flex-direction: row; /* Switch to row layout for larger screens */
       justify-content: space-between;
+      max-width: 80%; /* Increase width for larger screens */
   }
 
   .column {
@@ -126,11 +127,14 @@ label {
 }
 
 .title {
+  font-size: 2.5rem; /* Adjust font size for better visibility */
   text-align: center; /* Center-align the title */
   margin: 0 auto; /* Ensure proper centering */
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+  padding: 10px; /* Add padding to prevent truncation */
+  word-wrap: break-word; /* Ensure long words wrap properly */
 }
 
 .algorithm-selection {
@@ -309,6 +313,7 @@ button, input, textarea {
 @media (max-width: 480px) {
     .container {
         padding: 10px; /* Reduce padding for smaller screens */
+        max-width: 95%; /* Ensure sections fit smaller screens */
     }
 
     textarea, input {
@@ -329,6 +334,10 @@ button, input, textarea {
 
     .algorithm-selection {
         margin-top: 10px; /* Add spacing above dropdown */
+    }
+
+    .title {
+        font-size: 2rem; /* Adjust font size for smaller screens */
     }
 }
 
