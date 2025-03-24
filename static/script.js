@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const encryptedResultTextarea = document.getElementById("encryptedResult");
     const decryptedResultTextarea = document.getElementById("decryptedResult");
     const errorDiv = document.getElementById("error");
+    const container = document.querySelector(".container");
 
     function showError(message) {
         errorDiv.textContent = message;
@@ -110,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("clearButton").addEventListener("click", clearAll);
 
     function adjustLayoutForMobile() {
-        const container = document.querySelector(".container");
         if (window.innerWidth <= 768) {
             container.style.flexDirection = "column"; // Stack elements vertically on smaller screens
         } else {

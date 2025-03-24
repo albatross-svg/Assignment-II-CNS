@@ -135,7 +135,7 @@ label {
   margin: 0 auto; /* Ensure proper centering */
   padding: 15px; /* Add padding to prevent truncation */
   word-wrap: break-word; /* Ensure long words wrap properly */
-  max-width: 90%; /* Ensure the title does not overflow */
+  max-width: 95%; /* Ensure the title does not overflow */
   color: #003366;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   display: flex; /* Use flexbox for centering */
