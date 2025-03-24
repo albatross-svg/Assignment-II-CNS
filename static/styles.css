@@ -250,6 +250,13 @@ margin-bottom: 30px; /* Add separation space below the section */
   border: 1px solid #f5c6cb;
 }
 
+/* Ensure buttons and inputs are touch-friendly */
+button, input, textarea {
+    font-size: 1rem; /* Ensure text is readable */
+    padding: 12px; /* Increase padding for touch targets */
+    border-radius: 6px; /* Slightly larger radius for better aesthetics */
+}
+
 /* Responsive styles for mobile devices */
 @media (max-width: 768px) {
   body {
@@ -298,6 +305,33 @@ margin-bottom: 30px; /* Add separation space below the section */
   }
 }
 
+/* Improve layout for smaller screens */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    textarea, input {
+        font-size: 1rem; /* Ensure readability */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    button {
+        font-size: 1rem; /* Adjust button font size */
+        padding: 12px; /* Increase padding for touch targets */
+        width: 100%; /* Make buttons take full width */
+    }
+
+    .algorithm-selection select {
+        width: 100%; /* Ensure dropdown takes full width */
+        font-size: 1rem; /* Adjust font size for readability */
+    }
+
+    .algorithm-selection {
+        margin-top: 10px; /* Add spacing above dropdown */
+    }
+}
+
 /* Further adjustments for very small screens */
 @media (max-width: 480px) {
   h1, h2 {
@@ -315,4 +349,19 @@ margin-bottom: 30px; /* Add separation space below the section */
   .container {
     padding: 10px; /* Further reduce padding */
   }
+}
+
+/* Further adjustments for very small screens */
+@media (max-width: 320px) {
+    h1, h2 {
+        font-size: 1.2rem; /* Reduce heading size for very small screens */
+    }
+
+    textarea, input {
+        font-size: 0.8rem; /* Adjust font size for smaller screens */
+    }
+
+    button {
+        font-size: 0.8rem; /* Adjust button font size */
+    }
 }
