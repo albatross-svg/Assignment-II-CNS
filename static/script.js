@@ -108,4 +108,17 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("copyPlaintextButton").addEventListener("click", () => copyToClipboard("plaintext"));
     document.getElementById("copyEncryptedTextButton").addEventListener("click", () => copyToClipboard("encryptedText"));
     document.getElementById("clearButton").addEventListener("click", clearAll);
+
+    function adjustLayoutForMobile() {
+        const container = document.querySelector(".container");
+        if (window.innerWidth <= 768) {
+            container.style.flexDirection = "column"; // Stack elements vertically on smaller screens
+        } else {
+            container.style.flexDirection = "row"; // Use row layout for larger screens
+        }
+    }
+
+    // Adjust layout on window resize
+    window.addEventListener("resize", adjustLayoutForMobile);
+    adjustLayoutForMobile(); // Initial adjustment
 });

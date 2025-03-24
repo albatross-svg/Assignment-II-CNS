@@ -9,21 +9,19 @@ body {
   min-height: 100vh; /* Ensure the background covers the full viewport height */
 }  
 
+/* Ensure the container is responsive */
 .container {  
-  max-width: 100%; /* Allow the container to use the full width of the screen */
+  max-width: 95%; /* Allow the container to use most of the screen width */
   margin: auto;  
   background: white;  
   padding: 20px;  
   border-radius: 8px;  
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
-  transition: box-shadow 0.3s ease;  
-  backdrop-filter: blur(0px); /* Ensure container content is clear */
   display: flex;
   flex-direction: column; /* Default to column layout */
   gap: 20px; /* Even spacing between columns */
   justify-content: space-between;
   flex-wrap: wrap; /* Ensure proper layout on maximize */
-  overflow: visible; /* Ensure no content is hidden */
 }  
 
 .container:hover {  
@@ -44,13 +42,13 @@ button {
   background-size: cover;
   color: white;  
   border: none;  
-  border-radius: 4px;  
+  border-radius: 8px;  
   cursor: pointer;  
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
-  padding: 10px 15px; /* Restore original padding */
+  padding: 12px; /* Restore original padding */
   font-size: 1rem; /* Restore original font size */
-  width: auto; /* Ensure buttons adjust to content */
+  width: 100%; /* Ensure buttons adjust to content */
 }  
 
 button:hover {  
@@ -72,6 +70,10 @@ button:active {
 textarea, input {
   width: 100%; /* Adjust width to fit container */
   box-sizing: border-box; /* Include padding and border in width */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .input-group {
@@ -98,7 +100,6 @@ textarea {
   .container {
       flex-direction: row; /* Switch to row layout for larger screens */
       justify-content: space-between;
-      max-width: 90%; /* Increase width for larger screens */
   }
 
   .column {
@@ -127,148 +128,120 @@ label {
   font-size: 1.2rem; /* Slightly larger and consistent font size */
 }
 
+/* Adjust the title for mobile */
 .title {
-  font-size: 3rem; /* Ensure the title is large enough */
+  font-size: 2.5rem; /* Adjust font size for better visibility on mobile */
   text-align: center; /* Center-align the title */
-  margin: 0 auto; /* Center the title horizontally */
+  margin: 0 auto; /* Ensure proper centering */
+  padding: 10px;
+  word-wrap: break-word;
+  max-width: 100%;
+  color: #003366;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  padding: 20px; /* Add padding to prevent truncation */
-  word-wrap: break-word; /* Ensure long words wrap properly */
-  max-width: 100%; /* Ensure the title does not overflow */
-  color: #fff; /* Ensure the title color contrasts with the background */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
-  overflow-wrap: break-word; /* Break long words if necessary */
-  white-space: normal; /* Allow text to wrap to the next line */
-  overflow: visible; /* Ensure no content is hidden */
 }
 
-.header {
-  position: relative; /* Ensure the header is positioned relative to its content */
-  z-index: 1; /* Ensure the title is above the background */
-  background: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for better contrast */
-  padding: 20px; /* Add padding around the header */
-  border-radius: 8px; /* Add rounded corners for aesthetics */
-  display: flex; /* Use flexbox for layout */
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
-  flex-wrap: wrap; /* Allow wrapping of content if necessary */
-  overflow: visible; /* Ensure no content is hidden */
-}
-
-.header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('https://i.pinimg.com/736x/ac/ae/21/acae2190abcf950199518853fff6b365.jpg') no-repeat center center;
-  background-size: cover;
-  filter: blur(15px); /* Apply blur to the background image */
-  z-index: -1; /* Ensure the background is behind the content */
-  border-radius: 8px; /* Match the header's border radius */
-}
-
+/* Adjust the algorithm selection for mobile */
 .algorithm-selection {
-display: flex;
-flex-direction: column;
-align-items: center;
-margin-top: 20px;
-gap: 10px; /* Add spacing between title and dropdown */
-margin-bottom: 30px; /* Add separation space below the dropdown */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Add spacing between title and dropdown */
+  margin-top: 20px;
+  margin-bottom: 30px; /* Add separation space below the dropdown */
 }
 
 .algorithm-selection select {
-width: 250px; /* Make dropdown wider */
-padding: 10px;
-font-size: 1rem; /* Increase font size */
-border: 2px solid #003366; /* Change border color to deep blue */
-border-radius: 8px; /* Rounded corners */
-background-color: #f9f9f9; /* Light background */
-color: #333; /* Text color */
-transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  width: 100%; /* Ensure dropdown takes full width */
+  padding: 10px;
+  font-size: 1rem; /* Increase font size */
+  border: 2px solid #003366; /* Change border color to deep blue */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  color: #333; /* Text color */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .algorithm-selection select:hover {
-border-color: #002244; /* Darker deep blue on hover */
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+  border-color: #002244; /* Darker deep blue on hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
 }
 
 .algorithm-selection select:focus {
-outline: none;
-border-color: #001122; /* Deepest blue on focus */
-box-shadow: 0 0 8px rgba(0, 51, 102, 0.5); /* Glow effect on focus */
+  outline: none;
+  border-color: #001122; /* Deepest blue on focus */
+  box-shadow: 0 0 8px rgba(0, 51, 102, 0.5); /* Glow effect on focus */
 }
 
 .algorithm-selection button {
-padding: 15px 25px; /* Larger button */
-font-size: 1.2rem; /* Larger font size */
-background-color: #007BFF;
-color: white;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  padding: 15px 25px; /* Larger button */
+  font-size: 1.2rem; /* Larger font size */
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .algorithm-selection button:hover {
-background-color: #0056b3;
-transform: scale(1.05);
-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  background-color: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
 .algorithm-selection button:active {
-transform: scale(0.95);
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .algorithm-section {
-margin: 20px auto; /* Add spacing around the section */
-padding: 20px;
-background: rgba(255, 255, 255, 0.2); /* Light transparent background */
-border-radius: 8px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Match shadow level with other sections */
-transition: box-shadow 0.3s ease; /* Smooth transition for shadow changes */
-text-align: center; /* Center-align content */
+  margin: 20px auto; /* Add spacing around the section */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Match shadow level with other sections */
+  transition: box-shadow 0.3s ease; /* Smooth transition for shadow changes */
+  text-align: center; /* Center-align content */
 }
 
 .algorithm-section:hover {
-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Match hover shadow level with other sections */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Match hover shadow level with other sections */
 }
 
 .algorithm-section h2 {
-margin-bottom: 10px;
-color: #003366; /* Deep blue for headings */
+  margin-bottom: 10px;
+  color: #003366; /* Deep blue for headings */
 }
 
 .algorithm-section select {
-width: 250px;
-padding: 10px;
-font-size: 1rem;
-border: 2px solid #336699; /* Lighter deep blue border */
-border-radius: 8px;
-background-color: #f9f9f9;
-color: #333;
-transition: box-shadow 0.3s ease, border-color 0.3s ease;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Further reduced shadow effect */
+  width: 250px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #336699; /* Lighter deep blue border */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Further reduced shadow effect */
 }
 
 .algorithm-section select:hover {
-border-color: #224466; /* Slightly darker blue on hover */
-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Reduced hover shadow effect */
+  border-color: #224466; /* Slightly darker blue on hover */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Reduced hover shadow effect */
 }
 
 .algorithm-section select:focus {
-outline: none;
-border-color: #112233; /* Deepest blue on focus */
-box-shadow: 0 0 6px rgba(51, 102, 153, 0.3); /* Reduced focus glow effect */
+  outline: none;
+  border-color: #112233; /* Deepest blue on focus */
+  box-shadow: 0 0 6px rgba(51, 102, 153, 0.3); /* Reduced focus glow effect */
 }
 
 .encryption-decryption-section {
-margin-bottom: 30px; /* Add separation space below the section */
+  margin-bottom: 30px; /* Add separation space below the section */
 }
 
 .error {
@@ -288,129 +261,43 @@ margin-bottom: 30px; /* Add separation space below the section */
   border: 1px solid #f5c6cb;
 }
 
-/* Ensure buttons and inputs are touch-friendly */
-button, input, textarea {
-    font-size: 1rem; /* Ensure text is readable */
-    padding: 12px; /* Increase padding for touch targets */
-    border-radius: 6px; /* Slightly larger radius for better aesthetics */
-}
-
-/* Responsive styles for mobile devices */
+/* Responsive styles for smaller screens */
 @media (max-width: 768px) {
-  body {
-    padding: 10px; /* Reduce padding for smaller screens */
-  }
-
   .container {
-    max-width: 100%; /* Use full width for mobile */
-    padding: 15px; /* Reduce padding for smaller screens */
-    flex-direction: column; /* Stack elements vertically */
-  }
-
-  .column {
-    width: 100%; /* Ensure columns take full width */
-    margin-bottom: 20px; /* Add spacing between stacked columns */
-  }
-
-  textarea, input {
-    font-size: 1rem; /* Increase font size for better readability */
-    padding: 8px; /* Adjust padding for smaller screens */
-  }
-
-  button {
-    font-size: 1rem; /* Adjust button font size */
-    padding: 10px; /* Adjust button padding */
-    width: 100%; /* Make buttons take full width */
-  }
-
-  .algorithm-selection {
-    width: 100%; /* Ensure dropdown takes full width */
-    margin-top: 10px; /* Add spacing above dropdown */
-  }
-
-  .algorithm-selection select {
-    width: 100%; /* Make dropdown take full width */
-    font-size: 1rem; /* Adjust font size for readability */
-  }
-
-  .input-group {
-    flex-direction: column; /* Stack input and button vertically */
-    gap: 10px; /* Add spacing between elements */
-  }
-
-  .input-group button {
-    width: 100%; /* Ensure buttons take full width */
+    padding: 15px;
   }
 
   .title {
-    font-size: 2.8rem; /* Adjust font size for smaller screens */
-    padding: 15px; /* Add padding to prevent truncation */
+    font-size: 2rem;
   }
-}
 
-/* Improve layout for smaller screens */
-@media (max-width: 480px) {
-    .container {
-        padding: 10px; /* Reduce padding for smaller screens */
-        max-width: 98%; /* Ensure sections fit smaller screens */
-    }
-
-    textarea, input {
-        font-size: 1rem; /* Ensure readability */
-        padding: 10px; /* Adjust padding for smaller screens */
-    }
-
-    button {
-        font-size: 1rem; /* Adjust button font size */
-        padding: 12px; /* Increase padding for touch targets */
-        width: 100%; /* Make buttons take full width */
-    }
-
-    .algorithm-selection select {
-        width: 100%; /* Ensure dropdown takes full width */
-        font-size: 1rem; /* Adjust font size for readability */
-    }
-
-    .algorithm-selection {
-        margin-top: 10px; /* Add spacing above dropdown */
-    }
-
-    .title {
-        font-size: 2.5rem; /* Further adjust font size for very small screens */
-        padding: 10px; /* Further reduce padding */
-    }
-}
-
-/* Further adjustments for very small screens */
-@media (max-width: 480px) {
-  h1, h2 {
-    font-size: 1rem; /* Reduce heading size */
+  .algorithm-selection select {
+    font-size: 0.9rem;
   }
 
   textarea, input {
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    font-size: 0.9rem;
   }
 
   button {
-    font-size: 0.9rem; /* Adjust button font size */
-  }
-
-  .container {
-    padding: 10px; /* Further reduce padding */
+    font-size: 0.9rem;
   }
 }
 
-/* Further adjustments for very small screens */
-@media (max-width: 320px) {
-    h1, h2 {
-        font-size: 1.2rem; /* Reduce heading size for very small screens */
-    }
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
 
-    textarea, input {
-        font-size: 0.8rem; /* Adjust font size for smaller screens */
-    }
+  .container {
+    padding: 10px;
+  }
 
-    button {
-        font-size: 0.8rem; /* Adjust button font size */
-    }
+  textarea, input {
+    font-size: 0.8rem;
+  }
+
+  button {
+    font-size: 0.8rem;
+  }
 }
