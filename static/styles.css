@@ -11,7 +11,7 @@ body {
 
 /* Ensure the container is responsive */
 .container {  
-  max-width: 95%; /* Allow the container to use most of the screen width */
+  max-width: 100%; /* Allow the container to use the full width of the screen */
   margin: auto;  
   background: white;  
   padding: 20px;  
@@ -130,17 +130,19 @@ label {
 
 /* Adjust the title for mobile */
 .title {
-  font-size: 2.5rem; /* Adjust font size for better visibility on mobile */
+  font-size: 2.8rem; /* Ensure the title is large enough */
   text-align: center; /* Center-align the title */
   margin: 0 auto; /* Ensure proper centering */
-  padding: 10px;
-  word-wrap: break-word;
-  max-width: 100%;
+  padding: 15px; /* Add padding to prevent truncation */
+  word-wrap: break-word; /* Ensure long words wrap properly */
+  max-width: 90%; /* Ensure the title does not overflow */
   color: #003366;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+  overflow-wrap: break-word; /* Break long words if necessary */
+  white-space: normal; /* Allow text to wrap to the next line */
 }
 
 /* Adjust the algorithm selection for mobile */
@@ -206,6 +208,11 @@ label {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Match shadow level with other sections */
   transition: box-shadow 0.3s ease; /* Smooth transition for shadow changes */
   text-align: center; /* Center-align content */
+  width: 100%; /* Ensure sections take the full width of the screen */
+  max-width: 100%; /* Prevent sections from being too narrow */
+  margin: 0 auto; /* Center the sections */
+  padding: 15px; /* Add padding for better spacing */
+  box-sizing: border-box; /* Include padding and border in width */
 }
 
 .algorithm-section:hover {
@@ -242,6 +249,11 @@ label {
 
 .encryption-decryption-section {
   margin-bottom: 30px; /* Add separation space below the section */
+  width: 100%; /* Ensure sections take the full width of the screen */
+  max-width: 100%; /* Prevent sections from being too narrow */
+  margin: 0 auto; /* Center the sections */
+  padding: 15px; /* Add padding for better spacing */
+  box-sizing: border-box; /* Include padding and border in width */
 }
 
 .error {
@@ -268,11 +280,13 @@ label {
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 2.5rem; /* Adjust font size for smaller screens */
+    padding: 10px; /* Add padding to prevent truncation */
   }
 
-  .algorithm-selection select {
-    font-size: 0.9rem;
+  .algorithm-section,
+  .encryption-decryption-section {
+    padding: 10px; /* Adjust padding for smaller screens */
   }
 
   textarea, input {
@@ -286,11 +300,17 @@ label {
 
 @media (max-width: 480px) {
   .title {
-    font-size: 1.8rem;
+    font-size: 2.2rem; /* Further adjust font size for very small screens */
+    padding: 10px; /* Further reduce padding */
   }
 
   .container {
     padding: 10px;
+  }
+
+  .algorithm-section,
+  .encryption-decryption-section {
+    padding: 8px; /* Further reduce padding for very small screens */
   }
 
   textarea, input {
