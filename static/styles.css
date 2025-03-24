@@ -10,7 +10,7 @@ body {
 }  
 
 .container {  
-  max-width: 97%; /* Slightly increase width to fit all elements */
+  max-width: 100%; /* Allow the container to use the full width of the screen */
   margin: auto;  
   background: white;  
   padding: 20px;  
@@ -133,11 +133,13 @@ label {
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  padding: 20px 10px; /* Add padding to the left and right to prevent truncation */
+  padding: 20px; /* Add padding to prevent truncation */
   word-wrap: break-word; /* Ensure long words wrap properly */
-  max-width: 100%; /* Ensure the title does not overflow */
+  max-width: 90%; /* Ensure the title does not overflow */
   color: #fff; /* Ensure the title color contrasts with the background */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
+  overflow-wrap: break-word; /* Break long words if necessary */
+  white-space: normal; /* Allow text to wrap to the next line */
 }
 
 .header {
@@ -146,6 +148,10 @@ label {
   background: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for better contrast */
   padding: 20px; /* Add padding around the header */
   border-radius: 8px; /* Add rounded corners for aesthetics */
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  flex-wrap: wrap; /* Allow wrapping of content if necessary */
 }
 
 .header::before {
@@ -335,7 +341,7 @@ button, input, textarea {
 
   .title {
     font-size: 2.5rem; /* Adjust font size for smaller screens */
-    padding: 15px 10px; /* Add padding to prevent truncation */
+    padding: 15px; /* Add padding to prevent truncation */
   }
 }
 
@@ -368,7 +374,7 @@ button, input, textarea {
 
     .title {
         font-size: 2.5rem; /* Adjust font size for smaller screens */
-        padding: 15px 10px; /* Add padding to prevent truncation */
+        padding: 15px; /* Add padding to prevent truncation */
     }
 }
 
