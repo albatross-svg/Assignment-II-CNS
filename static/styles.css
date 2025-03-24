@@ -10,7 +10,7 @@ body {
 }  
 
 .container {  
-  max-width: 90%; /* Adjust width to fit most screen sizes */
+  max-width: 95%; /* Increase width to fit most screen sizes */
   margin: auto;  
   background: white;  
   padding: 20px;  
@@ -97,7 +97,7 @@ textarea {
   .container {
       flex-direction: row; /* Switch to row layout for larger screens */
       justify-content: space-between;
-      max-width: 80%; /* Increase width for larger screens */
+      max-width: 85%; /* Increase width for larger screens */
   }
 
   .column {
@@ -127,14 +127,15 @@ label {
 }
 
 .title {
-  font-size: 2.5rem; /* Adjust font size for better visibility */
+  font-size: 2.8rem; /* Increase font size for better visibility */
   text-align: center; /* Center-align the title */
   margin: 0 auto; /* Ensure proper centering */
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  padding: 10px; /* Add padding to prevent truncation */
+  padding: 15px; /* Add padding to prevent truncation */
   word-wrap: break-word; /* Ensure long words wrap properly */
+  max-width: 100%; /* Ensure the title does not overflow */
 }
 
 .algorithm-selection {
@@ -313,7 +314,7 @@ button, input, textarea {
 @media (max-width: 480px) {
     .container {
         padding: 10px; /* Reduce padding for smaller screens */
-        max-width: 95%; /* Ensure sections fit smaller screens */
+        max-width: 98%; /* Ensure sections fit smaller screens */
     }
 
     textarea, input {
@@ -337,7 +338,8 @@ button, input, textarea {
     }
 
     .title {
-        font-size: 2rem; /* Adjust font size for smaller screens */
+        font-size: 2.2rem; /* Adjust font size for smaller screens */
+        padding: 10px; /* Reduce padding for smaller screens */
     }
 }
 
