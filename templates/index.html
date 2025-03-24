@@ -264,12 +264,27 @@
             font-weight: bold; /* Bold font */
             color: #003366; /* Deep blue color */
             text-align: center; /* Center-align the title */
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
             margin: 0 auto; /* Ensure proper centering */
-            display: flex; /* Use flexbox for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            padding: 20px; /* Add padding to prevent truncation */
+            max-width: 100%; /* Ensure the title does not overflow */
+            word-wrap: break-word; /* Ensure long words wrap properly */
+            overflow-wrap: break-word; /* Break long words if necessary */
+            white-space: normal; /* Allow text to wrap to the next line */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.8rem; /* Adjust font size for smaller screens */
+                padding: 15px; /* Add padding to prevent truncation */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.5rem; /* Further adjust font size for very small screens */
+                padding: 10px; /* Further reduce padding */
+            }
         }
 
         .container {
