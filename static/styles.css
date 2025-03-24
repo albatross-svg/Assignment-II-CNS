@@ -10,7 +10,7 @@ body {
 }  
 
 .container {  
-  max-width: 95%; /* Increase width to fit most screen sizes */
+  max-width: 97%; /* Slightly increase width to fit all elements */
   margin: auto;  
   background: white;  
   padding: 20px;  
@@ -97,7 +97,7 @@ textarea {
   .container {
       flex-direction: row; /* Switch to row layout for larger screens */
       justify-content: space-between;
-      max-width: 85%; /* Increase width for larger screens */
+      max-width: 90%; /* Increase width for larger screens */
   }
 
   .column {
@@ -127,13 +127,13 @@ label {
 }
 
 .title {
-  font-size: 3rem; /* Increase font size for better visibility */
+  font-size: 3rem; /* Ensure the title is large enough */
   text-align: center; /* Center-align the title */
   margin: 0 auto; /* Center the title horizontally */
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  padding: 20px; /* Add padding to prevent truncation */
+  padding: 20px 10px; /* Add padding to the left and right to prevent truncation */
   word-wrap: break-word; /* Ensure long words wrap properly */
   max-width: 100%; /* Ensure the title does not overflow */
   color: #fff; /* Ensure the title color contrasts with the background */
@@ -335,7 +335,7 @@ button, input, textarea {
 
   .title {
     font-size: 2.5rem; /* Adjust font size for smaller screens */
-    padding: 15px; /* Reduce padding for smaller screens */
+    padding: 15px 10px; /* Add padding to prevent truncation */
   }
 }
 
@@ -367,8 +367,8 @@ button, input, textarea {
     }
 
     .title {
-        font-size: 2.2rem; /* Adjust font size for smaller screens */
-        padding: 10px; /* Reduce padding for smaller screens */
+        font-size: 2.5rem; /* Adjust font size for smaller screens */
+        padding: 15px 10px; /* Add padding to prevent truncation */
     }
 }
 
