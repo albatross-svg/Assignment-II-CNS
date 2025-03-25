@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Updated viewport meta tag -->
-    <title>Cryptography</title>
+    
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
         /* Updated background with cybersecurity theme */
@@ -260,16 +260,16 @@
 
         .title {
             font-family: 'Georgia', serif; /* Beautiful serif font */
-            font-size: 3.5rem; /* Bigger font size */
+            font-size: 3.5rem; /* Default font size */
             font-weight: bold; /* Bold font */
             color: #003366; /* Deep blue color */
             text-align: center; /* Center-align the title */
             margin: 0 auto; /* Ensure proper centering */
             padding: 20px; /* Add padding to prevent truncation */
             max-width: 100%; /* Ensure the title does not overflow */
-            word-wrap: break-word; /* Ensure long words wrap properly */
-            overflow-wrap: break-word; /* Break long words if necessary */
-            white-space: normal; /* Allow text to wrap to the next line */
+            white-space: nowrap; /* Prevent wrapping to the next line */
+            overflow: hidden; /* Prevent overflow */
+            text-overflow: ellipsis; /* Add ellipsis if the title overflows */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
         }
 
@@ -278,6 +278,11 @@
                 font-size: 2.8rem; /* Adjust font size for smaller screens */
                 padding: 15px; /* Add padding to prevent truncation */
             }
+
+            .container {
+                padding: 15px;
+                gap: 15px; /* Adjust spacing for smaller screens */
+            }
         }
 
         @media (max-width: 480px) {
@@ -285,16 +290,37 @@
                 font-size: 2.5rem; /* Further adjust font size for very small screens */
                 padding: 10px; /* Further reduce padding */
             }
+
+            .container {
+                max-width: 100%; /* Use full width for very small screens */
+                padding: 10px; /* Further reduce padding */
+            }
         }
 
         .container {
+            max-width: 95%; /* Default container width */
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             display: flex;
-            flex-direction: column; /* Default to column layout for mobile */
-            gap: 20px; /* Space between columns */
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .column {
-            width: 100%; /* Full width for mobile view */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 98%; /* Slightly widen the container for smaller screens */
+                padding: 15px; /* Adjust padding for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%; /* Use full width for very small screens */
+                padding: 10px; /* Further reduce padding */
+            }
         }
 
         textarea, input {
@@ -542,6 +568,12 @@
             padding: 20px;
             border-radius: 8px;
             overflow: hidden;
+            width: 100%; /* Ensure the header spans the full width */
+            display: flex;
+            justify-content: center; /* Center the title horizontally */
+            align-items: center; /* Center the title vertically */
+            padding: 20px; /* Add padding around the header */
+            box-sizing: border-box; /* Include padding in width calculations */
         }
 
         .header::before {
@@ -571,6 +603,7 @@
             border-radius: 8px;
             overflow: hidden;
         }
+        
 
         .footer::before {
             content: '';
@@ -687,8 +720,13 @@
     <div class="background">
         <!-- Header Section -->
         <header class="header">
-            <h1 class="title">Cryptography Tool</h1>
-            <p class="tagline">Explore cryptographic algorithms</p>
+            <div class="title-container">
+                <h1 class="title">
+                    <span>Cypher Tool</span>
+                    
+                </h1>
+                <p class="tagline">Explore cryptographic algorithms</p>
+            </div>
         </header>
 
         <div id="app">
@@ -775,11 +813,11 @@
                             this.encryptedResult = data.encrypted_text;
                             this.encryptedText = data.encrypted_text; // Automatically fill the encrypted text for decryption
                         } else {
-                            this.errorMessage = data.error || "Encryption failed.";
+                            this.errorMessage = data.error || "Encryption failed. Please check your input.";
                             alert(this.errorMessage); // Display popup box with the error message
                         }
                     } catch (error) {
-                        this.errorMessage = "Network error. Check Flask server.";
+                        this.errorMessage = "Network error: Unable to reach the Flask server. Ensure the server is running and accessible.";
                         alert(this.errorMessage); // Display popup box for network errors
                     }
                 },
@@ -795,11 +833,11 @@
                         if (response.ok) {
                             this.decryptedResult = data.decrypted_text;
                         } else {
-                            this.errorMessage = data.error || "Decryption failed.";
+                            this.errorMessage = data.error || "Decryption failed. Please check your input.";
                             alert(this.errorMessage); // Display popup box with the error message
                         }
                     } catch (error) {
-                        this.errorMessage = "Network error. Check Flask server.";
+                        this.errorMessage = "Network error: Unable to reach the Flask server. Ensure the server is running and accessible.";
                         alert(this.errorMessage); // Display popup box for network errors
                     }
                 },

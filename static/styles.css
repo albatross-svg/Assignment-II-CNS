@@ -10,7 +10,7 @@ body {
 }  
 
 .container {  
-    max-width: 600px;  
+    max-width: 100%; /* Ensure container uses full width */
     margin: auto;  
     background: white;  
     padding: 20px;  
@@ -128,9 +128,24 @@ label {
 .title {
     text-align: center; /* Center-align the title */
     margin: 0 auto; /* Ensure proper centering */
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    font-size: 3rem; /* Default font size */
+    line-height: 1.2; /* Tighter line height */
+    color: #003366; /* Deep blue color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack words vertically */
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem; /* Further reduce font size for very small screens */
+    }
 }
 
 .algorithm-selection {
