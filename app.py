@@ -4,6 +4,8 @@ from Crypto.Cipher import DES, AES, DES3
 from Crypto.Util.Padding import pad, unpad
 from Crypto.Random import get_random_bytes
 import base64
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import serialization, hashes
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 CORS(app)
@@ -102,6 +104,53 @@ def validate_aes_key(key):
     if len(key) < 16:
         raise ValueError("AES key must be at least 16 bytes long.")
     return key.ljust(16)[:16]  # Pad or truncate to 16 bytes
+
+# RSA key generation
+def generate_rsa_keys():
+    private_key = rsa.generate_private_key(
+        public_exponent=65537,
+        key_size=2048  # Ensure the key is 2048 bits
+    )
+    private_pem = private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.PKCS8,
+        encryption_algorithm=serialization.NoEncryption()
+    ).decode('utf-8')
+    public_pem = private_key.public_key().public_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PublicFormat.SubjectPublicKeyInfo
+    ).decode('utf-8')
+    return private_pem, public_pem  # Return keys with BEGIN/END lines intact
+
+# RSA encryption
+def rsa_encrypt(public_key, plaintext):
+    # Ensure the public key has proper PEM formatting
+    public_key_pem = f"-----BEGIN PUBLIC KEY-----\n{public_key}\n-----END PUBLIC KEY-----"
+    public_key_obj = serialization.load_pem_public_key(public_key_pem.encode('utf-8'))
+    encrypted = public_key_obj.encrypt(
+        plaintext.encode('utf-8'),
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return base64.b64encode(encrypted).decode('utf-8')
+
+# RSA decryption
+def rsa_decrypt(private_key, encrypted):
+    # Ensure the private key has proper PEM formatting
+    private_key_pem = f"-----BEGIN PRIVATE KEY-----\n{private_key}\n-----END PRIVATE KEY-----"
+    private_key_obj = serialization.load_pem_private_key(private_key_pem.encode('utf-8'), password=None)
+    decrypted = private_key_obj.decrypt(
+        base64.b64decode(encrypted.encode('utf-8')),
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return decrypted.decode('utf-8')
 
 @app.errorhandler(Exception)
 def handle_exception(e):
@@ -231,6 +280,47 @@ def api_decrypt_des():
         return jsonify({'decrypted_text': result})
     except ValueError as e:
         return jsonify({'error': str(e)}), 400  # Return error for invalid key
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/rsa/generate_keys', methods=['GET'])
+def api_generate_rsa_keys():
+    try:
+        private_key, public_key = generate_rsa_keys()
+        # Remove BEGIN/END lines and newlines for display purposes only
+        private_key_cleaned = "\n".join(private_key.splitlines()[1:-1])
+        public_key_cleaned = "\n".join(public_key.splitlines()[1:-1])
+        return jsonify({'private_key': private_key_cleaned, 'public_key': public_key_cleaned})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/rsa/encrypt', methods=['POST'])
+def api_encrypt_rsa():
+    try:
+        data = request.json
+        public_key = data.get('public_key')
+        plaintext = data.get('plaintext')
+        if not public_key or not plaintext:
+            return jsonify({'error': 'Public key and plaintext are required.'}), 400
+        result = rsa_encrypt(public_key, plaintext)
+        return jsonify({'encrypted_text': result})
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/rsa/decrypt', methods=['POST'])
+def api_decrypt_rsa():
+    try:
+        data = request.json
+        private_key = data.get('private_key')
+        encrypted = data.get('encrypted')
+        if not private_key or not encrypted:
+            return jsonify({'error': 'Private key and encrypted text are required.'}), 400
+        result = rsa_decrypt(private_key, encrypted)
+        return jsonify({'decrypted_text': result})
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

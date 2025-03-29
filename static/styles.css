@@ -1,249 +1,722 @@
-body {  
-    font-family: Arial, sans-serif;  
-    margin: 0;  
-    padding: 20px;  
-    background: url('https://i.pinimg.com/736x/ac/ae/21/acae2190abcf950199518853fff6b365.jpg') no-repeat center center fixed;
-    background-size: cover;
-    filter: blur(15px); /* Ensure the blur effect is applied */
-    color: #fff;
-    min-height: 100vh; /* Ensure the background covers the full viewport height */
-}  
+<style>
+        /* Updated background with cybersecurity theme */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url('https://i.pinimg.com/736x/ac/ae/21/acae2190abcf950199518853fff6b365.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh; /* Ensure the background covers the full viewport height */
+        }
 
-.container {  
-    max-width: 100%; /* Ensure container uses full width */
-    margin: auto;  
-    background: white;  
-    padding: 20px;  
-    border-radius: 8px;  
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
-    transition: box-shadow 0.3s ease;  
-    backdrop-filter: blur(0px); /* Ensure container content is clear */
-    display: flex;
-    flex-direction: column; /* Default to column layout */
-    gap: 20px; /* Even spacing between columns */
-    justify-content: space-between;
-    flex-wrap: wrap; /* Ensure proper layout on maximize */
-}  
+        h1, h2 {
+            color: #003366; /* Deep blue for headings */
+            text-align: center;
+        }
 
-.container:hover {  
-}  
+        input, textarea {
+            margin: 5px 0;
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-h1 {  
-    color: #333;  
-    text-align: center;  
-}  
+        /* Shadowed buttons with hover effects */
+        button {
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvJHsE7RHeuqR-JYr1mmxBkEMPv3kBUYjVoT0o0ivTslMp1QFKxTj9xcKX-4v_NvF2Zmk&usqp=CAU') no-repeat center center;
+            background-size: cover;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            padding: 10px 15px; /* Restore original padding */
+            font-size: 1rem; /* Restore original font size */
+            width: auto; /* Ensure buttons adjust to content */
+        }
 
-p {  
-    font-size: 16px;  
-    color: #555;  
-}  
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
 
-button {  
-    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvJHsE7RHeuqR-JYr1mmxBkEMPv3kBUYjVoT0o0ivTslMp1QFKxTj9xcKX-4v_NvF2Zmk&usqp=CAU') no-repeat center center;
-    background-size: cover;
-    color: white;  
-    border: none;  
-    border-radius: 4px;  
-    cursor: pointer;  
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    padding: 10px 15px; /* Restore original padding */
-    font-size: 1rem; /* Restore original font size */
-    width: auto; /* Ensure buttons adjust to content */
-}  
+        button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-button:hover {  
-    transform: scale(1.05); /* Slight zoom effect on hover */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-}  
+        .result {
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            color: #333;
+        }
 
-button:active {  
-    transform: scale(0.95); /* Slight shrink effect on click */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
 
-.column {
-    flex: 1;
-    min-width: 300px; /* Ensure columns don't shrink too much */
-    width: 100%; /* Full width for mobile view */
-}
+        /* Container with hover effect */
+        .container {
+            display: flex;
+            flex-direction: column; /* Default to column layout for mobile */
+            gap: 20px; /* Space between columns */
+            background: rgba(255, 255, 255, 0.2); /* Transparent background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
 
-textarea, input {
-    width: 100%; /* Adjust width to fit container */
-    box-sizing: border-box; /* Include padding and border in width */
-}
+        .container:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
 
-.input-group {
-    display: flex;
-    flex-direction: column; /* Ensure button is always below the textarea */
-    align-items: stretch;
-    gap: 10px; /* Even spacing between textarea and button */
-}
+        .column {
+            width: 100%; /* Full width for mobile view */
+        }
 
-.input-group button {
-    padding: 8px; /* Reduced padding for minimized view */
-    padding: 10px 5px; /* Reduced right-left padding for minimized view */
-    width: 100%; /* Button width matches the container */
-    height: 100%; /* Make button as tall as the display box width */
-    align-self: flex-start; /* Align button to the start of the container */
-    margin-top: 10px; /* Add spacing between textarea and button */
-}
+        .algorithm-selection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px; /* Add spacing between title and dropdown */
+            margin-bottom: 30px; /* Add separation space below the dropdown */
+        }
 
-textarea {
-    height: 100px; /* Set a fixed height for the textarea */
-}
+        .algorithm-selection select {
+            width: 250px; /* Make dropdown wider */
+            padding: 10px;
+            font-size: 1rem; /* Increase font size */
+            border: 2px solid #003366; /* Change border color to deep blue */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            color: #333; /* Text color */
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
 
-@media (min-width: 768px) {
-    .container {
-        flex-direction: row; /* Switch to row layout for larger screens */
-        justify-content: space-between;
-    }
+        .algorithm-selection select:hover {
+            border-color: #002244; /* Darker deep blue on hover */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+        }
 
-    .column {
-        width: 45%; /* Restore column width for larger screens */
-    }
+        .algorithm-selection select:focus {
+            outline: none;
+            border-color: #001122; /* Deepest blue on focus */
+            box-shadow: 0 0 8px rgba(0, 51, 102, 0.5); /* Glow effect on focus */
+        }
 
-    .input-group {
-        flex-direction: column; /* Keep button below textarea even on larger screens */
-        align-items: stretch;
-        gap: 10px; /* Maintain even spacing */
-    }
-    .input-group button {
-        padding: 10px; /* Restore padding for maximized view */
-        padding: 10px 15px; /* Restore right-left padding for maximized view */
-        width: auto; /* Button width adjusts to content when maximized */
-        height: auto; /* Reset height for maximized view */
-        align-self: flex-start; /* Align button to the start of the container */
-    }
-}
+        .algorithm-selection button {
+            padding: 15px 25px; /* Larger button */
+            font-size: 1.2rem; /* Larger font size */
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #003366; /* Deep blue color */
-    font-size: 1.2rem; /* Slightly larger and consistent font size */
-}
+        .algorithm-selection button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
 
-.title {
-    text-align: center; /* Center-align the title */
-    margin: 0 auto; /* Ensure proper centering */
-    font-size: 3rem; /* Default font size */
-    line-height: 1.2; /* Tighter line height */
-    color: #003366; /* Deep blue color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack words vertically */
-}
+        .algorithm-selection button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-@media (max-width: 768px) {
-    .title {
-        font-size: 2.5rem; /* Adjust font size for smaller screens */
-    }
-}
+        .background {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url('https://i.pinimg.com/736x/ac/ae/21/acae2190abcf950199518853fff6b365.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh; /* Ensure the background covers the full viewport height */
+        }
 
-@media (max-width: 480px) {
-    .title {
-        font-size: 2rem; /* Further reduce font size for very small screens */
-    }
-}
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #003366; /* Deep blue color */
+            font-size: 1.2rem; /* Slightly larger and consistent font size */
+        }
 
-.algorithm-selection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  gap: 10px; /* Add spacing between title and dropdown */
-  margin-bottom: 30px; /* Add separation space below the dropdown */
-}
+        .input-group {
+            display: flex;
+            flex-direction: column; /* Default to column layout */
+            align-items: stretch;
+            gap: 10px; /* Space between textarea and button */
+        }
 
-.algorithm-selection select {
-  width: 250px; /* Make dropdown wider */
-  padding: 10px;
-  font-size: 1rem; /* Increase font size */
-  border: 2px solid #003366; /* Change border color to deep blue */
-  border-radius: 8px; /* Rounded corners */
-  background-color: #f9f9f9; /* Light background */
-  color: #333; /* Text color */
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
+        .input-group button {
+            width: auto; /* Button width adjusts to the text content */
+            align-self: flex-start; /* Align button to the start of the container */
+        }
 
-.algorithm-selection select:hover {
-  border-color: #002244; /* Darker deep blue on hover */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
-}
+        textarea {
+            height: 100px; /* Set a fixed height for the textarea */
+        }
 
-.algorithm-selection select:focus {
-  outline: none;
-  border-color: #001122; /* Deepest blue on focus */
-  box-shadow: 0 0 8px rgba(0, 51, 102, 0.5); /* Glow effect on focus */
-}
+        @media (min-width: 768px) {
+            .input-group {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                align-items: center;
+                gap: 10px; /* Space between textarea and button */
+            }
 
-.algorithm-selection button {
-  padding: 15px 25px; /* Larger button */
-  font-size: 1.2rem; /* Larger font size */
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+                align-self: center; /* Center align button for larger screens */
+            }
+        }
 
-.algorithm-selection button:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-}
+        .input-group button {
+            width: 100%; /* Default button width matches the display box */
+            height: 100%; /* Make button as tall as the display box width */
+        }
 
-.algorithm-selection button:active {
-  transform: scale(0.95);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+        textarea {
+            height: 100px; /* Set a fixed height for the textarea */
+        }
 
-.algorithm-section {
-  margin: 20px auto; /* Add spacing around the section */
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.2); /* Light transparent background */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Match shadow level with other sections */
-  transition: box-shadow 0.3s ease; /* Smooth transition for shadow changes */
-  text-align: center; /* Center-align content */
-}
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                justify-content: space-between;
+            }
 
-.algorithm-section:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Match hover shadow level with other sections */
-}
+            .column {
+                width: 45%; /* Restore column width for larger screens */
+            }
 
-.algorithm-section h2 {
-  margin-bottom: 10px;
-  color: #003366; /* Deep blue for headings */
-}
+            .input-group {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                align-items: center;
+                gap: 0; /* Remove space between textarea and button */
+            }
 
-.algorithm-section select {
-  width: 250px;
-  padding: 10px;
-  font-size: 1rem;
-  border: 2px solid #336699; /* Lighter deep blue border */
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  color: #333;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Further reduced shadow effect */
-}
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+                height: auto; /* Reset height for maximized view */
+            }
+        }
 
-.algorithm-section select:hover {
-  border-color: #224466; /* Slightly darker blue on hover */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Reduced hover shadow effect */
-}
+        .input-group button {
+            width: 100%; /* Default button width matches the display box */
+        }
 
-.algorithm-section select:focus {
-  outline: none;
-  border-color: #112233; /* Deepest blue on focus */
-  box-shadow: 0 0 6px rgba(51, 102, 153, 0.3); /* Reduced focus glow effect */
-}
+        @media (min-width: 768px) {
+            .input-group {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                align-items: center;
+                gap: 0; /* Remove space between textarea and button */
+            }
 
-.encryption-decryption-section {
-  margin-bottom: 30px; /* Add separation space below the section */
-}
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+            }
+        }
+
+        .input-group button {
+            padding: 8px; /* Reduced padding for minimized view */
+        }
+
+        @media (min-width: 768px) {
+            .input-group button {
+                padding: 10px; /* Restore padding for maximized view */
+            }
+        }
+
+        .input-group button {
+            padding: 10px 5px; /* Reduced right-left padding for minimized view */
+        }
+
+        @media (min-width: 768px) {
+            .input-group button {
+                padding: 10px 15px; /* Restore right-left padding for maximized view */
+            }
+        }
+
+        .title {
+            font-family: 'Georgia', serif; /* Beautiful serif font */
+            font-size: 4.5rem; /* Slightly larger size */
+            font-weight: bold; /* Bold font */
+            color: #003366; /* Deep blue color */
+            text-align: center; /* Center-align the title */
+            margin: 0 auto; /* Ensure proper centering */
+            padding: 20px; /* Add padding to prevent truncation */
+            max-width: 100%; /* Ensure the title does not overflow */
+            white-space: nowrap; /* Prevent wrapping to the next line */
+            overflow: hidden; /* Prevent overflow */
+            text-overflow: ellipsis; /* Add ellipsis if the title overflows */
+            text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 86, 179, 0.7), 0 0 30px rgba(0, 86, 179, 0.5); /* Enhanced shadow and glow */
+            letter-spacing: 2px; /* Add spacing between letters for elegance */
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.8rem; /* Adjust font size for smaller screens */
+                padding: 15px; /* Add padding to prevent truncation */
+            }
+
+            .container {
+                padding: 15px;
+                gap: 15px; /* Adjust spacing for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.5rem; /* Further adjust font size for very small screens */
+                padding: 10px; /* Further reduce padding */
+            }
+
+            .container {
+                max-width: 100%; /* Use full width for very small screens */
+                padding: 10px; /* Further reduce padding */
+            }
+        }
+
+        textarea, input {
+            width: 100%; /* Adjust width to fit container */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column; /* Default to column layout */
+            align-items: stretch;
+            gap: 10px; /* Space between textarea and button */
+        }
+
+        .input-group button {
+            width: 100%; /* Button width matches the container */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                justify-content: space-between;
+            }
+
+            .column {
+                width: 45%; /* Restore column width for larger screens */
+            }
+
+            .input-group {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                align-items: center;
+                gap: 10px; /* Space between textarea and button */
+            }
+
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Default to column layout */
+            gap: 20px; /* Even spacing between columns */
+        }
+
+        .column {
+            width: 100%; /* Full width for mobile view */
+        }
+
+        textarea, input {
+            width: 100%; /* Adjust width to fit container */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column; /* Ensure button is always below the textarea */
+            align-items: stretch;
+            gap: 10px; /* Even spacing between textarea and button */
+        }
+
+        .input-group button {
+            width: 100%; /* Button width matches the container */
+        }
+
+        textarea {
+            height: 100px; /* Set a fixed height for the textarea */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                justify-content: space-between;
+            }
+
+            .column {
+                width: 45%; /* Restore column width for larger screens */
+            }
+
+            .input-group {
+                flex-direction: column; /* Keep button below textarea even on larger screens */
+                align-items: stretch;
+                gap: 10px; /* Maintain even spacing */
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Default to column layout */
+            gap: 20px; /* Even spacing between columns */
+        }
+
+        .column {
+            width: 100%; /* Full width for mobile view */
+        }
+
+        textarea, input {
+            width: 100%; /* Adjust width to fit container */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column; /* Ensure button is always below the textarea */
+            align-items: stretch;
+            gap: 10px; /* Even spacing between textarea and button */
+        }
+
+        textarea {
+            height: 100px; /* Set a fixed height for the textarea */
+        }
+
+        .input-group button {
+            width: auto; /* Button width adjusts to content */
+            align-self: flex-start; /* Align button to the start of the container */
+            margin-top: 10px; /* Add spacing between textarea and button */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* Switch to row layout for larger screens */
+                justify-content: space-between;
+            }
+
+            .column {
+                width: 45%; /* Restore column width for larger screens */
+            }
+
+            .input-group {
+                flex-direction: column; /* Keep button below textarea even on larger screens */
+                align-items: stretch;
+                gap: 10px; /* Maintain even spacing */
+            }
+
+            .input-group button {
+                width: auto; /* Button width adjusts to content when maximized */
+                align-self: flex-start; /* Align button to the start of the container */
+            }
+        }
+
+        .algorithm-selection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px; /* Add spacing between title and dropdown */
+        }
+
+        .algorithm-selection select {
+            width: 250px; /* Make dropdown wider */
+            padding: 10px;
+            font-size: 1rem; /* Increase font size */
+            border: 2px solid #003366; /* Change border color to deep blue */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            color: #333; /* Text color */
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .algorithm-selection select:hover {
+            border-color: #002244; /* Darker deep blue on hover */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+        }
+
+        .algorithm-selection select:focus {
+            outline: none;
+            border-color: #001122; /* Deepest blue on focus */
+            box-shadow: 0 0 8px rgba(0, 51, 102, 0.5); /* Glow effect on focus */
+        }
+
+        .algorithm-selection button {
+            padding: 15px 25px; /* Larger button */
+            font-size: 1.2rem; /* Larger font size */
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .algorithm-selection button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .algorithm-selection button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .algorithm-section {
+            margin: 20px auto; /* Add spacing around the section */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Match shadow level with other sections */
+            transition: box-shadow 0.3s ease; /* Smooth transition for shadow changes */
+            text-align: center; /* Center-align content */
+        }
+
+        .algorithm-section:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Match hover shadow level with other sections */
+        }
+
+        .algorithm-section h2 {
+            margin-bottom: 10px;
+            color: #003366; /* Deep blue for headings */
+        }
+
+        .algorithm-section select {
+            width: 250px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #336699; /* Lighter deep blue border */
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Further reduced shadow effect */
+        }
+
+        .algorithm-section select:hover {
+            border-color: #224466; /* Slightly darker blue on hover */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Reduced hover shadow effect */
+        }
+
+        .algorithm-section select:focus {
+            outline: none;
+            border-color: #112233; /* Deepest blue on focus */
+            box-shadow: 0 0 6px rgba(51, 102, 153, 0.3); /* Reduced focus glow effect */
+        }
+
+        .encryption-decryption-section {
+            margin-top: 30px; /* Add spacing above the encryption/decryption section */
+            margin-bottom: 30px; /* Add separation space below the section */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 100%; /* Ensure the header spans the full width */
+            display: flex;
+            justify-content: center; /* Center the title horizontally */
+            align-items: center; /* Center the title vertically */
+            padding: 20px; /* Add padding around the header */
+            box-sizing: border-box; /* Include padding in width calculations */
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://th.bing.com/th/id/OIP.4b0RCchFiaZMXcTTrQL_UwHaEJ?rs=1&pid=ImgDetMain') no-repeat center center;
+            background-size: cover;
+            filter: blur(2.25px); /* Apply slight 15% blur to the background image */
+            z-index: 0; /* Ensure the background is behind the content */
+        }
+
+        .header .title,
+        .header .tagline {
+            position: relative;
+            z-index: 1; /* Ensure text content is above the background */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://th.bing.com/th/id/OIP.4b0RCchFiaZMXcTTrQL_UwHaEJ?rs=1&pid=ImgDetMain') no-repeat center center;
+            background-size: cover;
+            filter: blur(2.25px); /* Apply slight 15% blur to the background image */
+            z-index: 0; /* Ensure the background is behind the content */
+        }
+
+        .footer p,
+        .footer a {
+            position: relative;
+            z-index: 1; /* Ensure text content is above the background */
+        }
+
+        .footer a {
+            color: #00bfff; /* Light blue for links */
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .header .title {
+            font-family: 'Georgia', serif;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #fff; /* Change title color to white */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .title,
+        .header .tagline,
+        .footer p,
+        .footer a {
+            color: #fff; /* Ensure text is white */
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8); /* Add small black shadow effect */
+            font-weight: bold; /* Make the borders of each letter strong */
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Stack elements vertically */
+                gap: 15px; /* Add spacing between stacked elements */
+            }
+
+            .column {
+                width: 100%; /* Full width for mobile */
+                margin-bottom: 20px; /* Add spacing between stacked columns */
+            }
+
+            textarea, input {
+                font-size: 1rem; /* Adjust font size for readability */
+                padding: 8px; /* Adjust padding for smaller screens */
+            }
+
+            button {
+                font-size: 1rem; /* Adjust button font size */
+                padding: 10px; /* Adjust button padding */
+                width: 100%; /* Make buttons take full width */
+            }
+
+            .algorithm-selection {
+                width: 100%; /* Ensure dropdown takes full width */
+                margin-top: 10px; /* Add spacing above dropdown */
+            }
+
+            .algorithm-selection select {
+                width: 100%; /* Make dropdown take full width */
+                font-size: 1rem; /* Adjust font size for readability */
+            }
+
+            .input-group {
+                flex-direction: column; /* Stack input and button vertically */
+                gap: 10px; /* Add spacing between elements */
+            }
+
+            .input-group button {
+                width: 100%; /* Ensure buttons take full width */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 1.5rem; /* Reduce heading size */
+            }
+
+            textarea, input {
+                font-size: 0.9rem; /* Adjust font size for smaller screens */
+            }
+
+            button {
+                font-size: 0.9rem; /* Adjust button font size */
+            }
+
+            .container {
+                padding: 10px; /* Further reduce padding */
+            }
+        }
+
+        .rsa-explanation {
+            text-align: center; /* Center the content */
+            margin: 20px auto; /* Add spacing around the section */
+        }
+
+        .rsa-title {
+            color: #003366; /* Deep blue color for the title */
+            font-weight: bold;
+            font-size: 1.5rem; /* Reduced font size for the title */
+            margin-bottom: 10px; /* Add spacing below the title */
+        }
+
+        .rsa-description {
+            color: #003366; /* Deep blue color for bullet points */
+            font-size: 1rem; /* Standard font size for description */
+            line-height: 1.5; /* Improve readability with line spacing */
+            list-style-type: disc; /* Use bullet points */
+            padding-left: 0; /* Remove indentation */
+            display: inline-block; /* Center the list */
+            text-align: left; /* Align text within the list */
+        }
+
+        .section-title {
+            color: #003366; /* Deep blue color */
+            font-size: 1.2rem; /* Match size with other text in the container */
+            font-weight: bold;
+            text-align: center; /* Center-align the title */
+            margin-bottom: 10px; /* Add spacing below the title */
+        }
+
+        .sender-title, .receiver-title, .encryption-title, .decryption-title, .algorithm-title {
+            font-size: 1.8rem; /* Match size with "Choose Algorithm" */
+            font-weight: bold;
+            color: #0056b3; /* Eye-catching blue color that fits the theme */
+            text-align: left; /* Left-align the text */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow for emphasis */
+            margin-bottom: 20px; /* Add spacing below the title */
+        }
+</style>
