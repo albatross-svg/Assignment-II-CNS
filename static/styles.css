@@ -13,7 +13,6 @@
         h1, h2 {
             color: #003366; /* Deep blue for headings */
             text-align: center;
-            
         }
 
         input, textarea {
@@ -253,7 +252,7 @@
 
         .title {
             font-family: 'Georgia', serif; /* Beautiful serif font */
-            font-size: 4.5rem; /* Slightly larger size */
+            font-size: 3.5rem; /* Default font size */
             font-weight: bold; /* Bold font */
             color: #003366; /* Deep blue color */
             text-align: center; /* Center-align the title */
@@ -263,8 +262,7 @@
             white-space: nowrap; /* Prevent wrapping to the next line */
             overflow: hidden; /* Prevent overflow */
             text-overflow: ellipsis; /* Add ellipsis if the title overflows */
-            text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 86, 179, 0.7), 0 0 30px rgba(0, 86, 179, 0.5); /* Enhanced shadow and glow */
-            letter-spacing: 2px; /* Add spacing between letters for elegance */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
         }
 
         @media (max-width: 768px) {
@@ -712,12 +710,21 @@
             margin-bottom: 10px; /* Add spacing below the title */
         }
 
-        .sender-title, .receiver-title, .encryption-title, .decryption-title, .algorithm-title {
+        .sender-title, .receiver-title, .encryption-title, .decryption-title {
             font-size: 1.8rem; /* Match size with "Choose Algorithm" */
             font-weight: bold;
-            color: #0056b3; /* Eye-catching blue color that fits the theme */
+            color: #003366; /* Deep blue color */
             text-align: left; /* Left-align the text */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow for emphasis */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for emphasis */
+            margin-bottom: 20px; /* Add spacing below the title */
+        }
+
+        .algorithm-title {
+            font-size: 1.8rem; /* Match size with "Sender" */
+            font-weight: bold;
+            color: #003366; /* Deep blue color */
+            text-align: left; /* Left-align the text */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for emphasis */
             margin-bottom: 20px; /* Add spacing below the title */
         }
 </style>
